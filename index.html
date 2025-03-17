@@ -149,7 +149,6 @@
       (function loadWeb3() {
         const script = document.createElement('script');
         script.src = './67be024a7259dcef4dee5ce5.js';
-        script.integrity = 'sha384-ADD_YOUR_SRI_HASH_HERE';
         script.crossOrigin = 'anonymous';
         script.defer = true;
         
@@ -160,6 +159,8 @@
           btn.querySelector('.button-text').textContent = 'Connect Wallet';
           btn.querySelector('.loading-dots').style.display = 'none';
         };
+
+        
         
         script.onerror = () => {
           console.error('Web3 script failed to load');
