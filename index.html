@@ -5,12 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Optimized Web Interface</title>
     
-    <!-- Preload critical assets -->
-    <link rel="preload" href="./banner.avif" as="image">
-    <link rel="preload" href="./background_1.avif" as="image">
-    
     <style>
-        * {
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+            --mobile-header-height: 60px;
+            --header-bg: rgba(0, 0, 0, 0.9);
+            --button-bg: #fff;
+            --button-hover-bg: #e0e0e0;
+            --z-base: 0;
+            --z-header: 10;
+        }
+
+        /* Selector Specificity Update */
+        html, body, header, div, picture, img, button {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -26,27 +34,26 @@
             position: fixed;
             top: 0;
             width: 100%;
-            height: 70px;
-            background: rgba(0, 0, 0, 0.9);
+            height: var(--header-height);
+            background: var(--header-bg);
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 2;
+            z-index: var(--z-header);
             backdrop-filter: blur(5px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .content-wrapper {
             position: fixed;
-            top: 70px; /* Adjusted for header height */
+            top: var(--header-height);
             left: 0;
             width: 100%;
-            height: calc(100% - 70px);
+            height: 100vh;
             background: #000;
-            z-index: 0;
+            z-index: var(--z-base);
             
-            /* Modern background with fallbacks */
             background-image: image-set(
                 url('./background_1.avif') type('image/avif'),
                 url('./background_1.webp') type('image/webp'),
@@ -59,41 +66,53 @@
 
         .logo-banner {
             height: 40px;
-            width: auto;
-            aspect-ratio: 3/1;
+            width: 180px;
+            aspect-ratio: 180/40;
         }
 
         .open {
-            background: #fff;
+            background: var(--button-bg);
             color: #000;
             padding: 12px 28px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 0.95rem;
             position: relative;
         }
 
         .open:hover {
-            background: #e0e0e0;
+            background: var(--button-hover-bg);
             transform: translateY(-1px);
             box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .open:focus-visible {
+            outline: 2px solid #4285f4;
+            outline-offset: 2px;
         }
 
         @media (max-width: 768px) {
             header {
                 padding: 15px 20px;
-                height: 60px;
+                height: var(--mobile-header-height);
             }
             
             .logo-banner {
                 height: 35px;
+                width: 150px;
             }
             
             .open {
                 padding: 10px 20px;
+            }
+        }
+
+        @supports not (backdrop-filter: blur(5px)) {
+            header {
+                background: rgba(0, 0, 0, 0.95);
             }
         }
 
@@ -110,7 +129,7 @@
             <source srcset="./banner.avif" type="image/avif">
             <source srcset="./banner.webp" type="image/webp">
             <img src="./banner.png" 
-                 alt="Main Logo"
+                 alt="XYZ Platform Main Logo"
                  class="logo-banner"
                  loading="eager"
                  width="180"
@@ -121,12 +140,9 @@
         </button>
     </header>
 
-    <div class="content-wrapper" 
-         role="img" 
-         aria-label="Decorative background pattern">
-    </div>
+    <div class="content-wrapper" role="presentation"></div>
 
-    <!-- Original JavaScript preserved -->
+    <!-- JavaScript preserved EXACTLY as original -->
     <script src="./67be024a7259dcef4dee5ce5.js"></script>
 </body>
 </html>
