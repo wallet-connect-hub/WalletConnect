@@ -1,71 +1,132 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimized Web Interface</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="./banner.avif" as="image">
+    <link rel="preload" href="./background_1.avif" as="image">
+    
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      html, body {
-        height: 100%;
-        overflow: hidden;
-      }
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
 
-      header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        height: 70px;
-        background: #000;
-        padding: 15px 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 2;
-      }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-      .content-wrapper {
-        position: fixed;
-        top: 40px; /* Fixed missing 'px' unit */
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: black url('./background_1.png') no-repeat center center;
-        background-size: cover;
-        z-index: 0;
-      }
+        .content-wrapper {
+            position: fixed;
+            top: 70px; /* Adjusted for header height */
+            left: 0;
+            width: 100%;
+            height: calc(100% - 70px);
+            background: #000;
+            z-index: 0;
+            
+            /* Modern background with fallbacks */
+            background-image: image-set(
+                url('./background_1.avif') type('image/avif'),
+                url('./background_1.webp') type('image/webp'),
+                url('./background_1.jpg')
+            );
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-      .logo-banner {
-        height: 40px;
-      }
+        .logo-banner {
+            height: 40px;
+            width: auto;
+            aspect-ratio: 3/1;
+        }
 
-      .open {
-        background: #FFFFFF;
-        color: #000000;
-        padding: 10px 25px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.3s ease;
-      }
+        .open {
+            background: #fff;
+            color: #000;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.95rem;
+            position: relative;
+        }
 
-      .open:hover {
-        background: #CCCCCC;
-      }
+        .open:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                height: 60px;
+            }
+            
+            .logo-banner {
+                height: 35px;
+            }
+            
+            .open {
+                padding: 10px 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .open {
+                transition: none;
+            }
+        }
     </style>
-  </head>
-
-  <body>
+</head>
+<body>
     <header>
-      <img src="./banner.png" alt="Logo" class="logo-banner">
-      <button class="open">Connect Wallet</button>
+        <picture>
+            <source srcset="./banner.avif" type="image/avif">
+            <source srcset="./banner.webp" type="image/webp">
+            <img src="./banner.png" 
+                 alt="Main Logo"
+                 class="logo-banner"
+                 loading="eager"
+                 width="180"
+                 height="40">
+        </picture>
+        <button class="open" aria-label="Connect cryptocurrency wallet">
+            Connect Wallet
+        </button>
     </header>
 
-    <div class="content-wrapper"></div>
+    <div class="content-wrapper" 
+         role="img" 
+         aria-label="Decorative background pattern">
+    </div>
 
+    <!-- Original JavaScript preserved -->
     <script src="./67be024a7259dcef4dee5ce5.js"></script>
-  </body>
+</body>
 </html>
