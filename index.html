@@ -1,12 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Web3 Gateway</title>
-    
-    <!-- Inline critical CSS -->
     <style>
       * {
         margin: 0;
@@ -34,19 +28,17 @@
 
       .content-wrapper {
         position: fixed;
-        top: 0;
+        top: 40px; /* Fixed missing 'px' unit */
         left: 0;
         width: 100%;
         height: 100%;
-        background: black url('./background_1.webp') no-repeat center center/cover;
+        background: black url('./background_1.png') no-repeat center center;
+        background-size: cover;
         z-index: 0;
       }
 
       .logo-banner {
         height: 40px;
-        width: auto;
-        max-width: 200px;
-        fetchpriority: high;
       }
 
       .open {
@@ -57,41 +49,23 @@
         border-radius: 8px;
         cursor: pointer;
         font-weight: bold;
-        transition: background 0.3s ease;
+        transition: all 0.3s ease;
       }
 
-      @media (hover: hover) {
-        .open:hover {
-          background: #CCCCCC;
-        }
-      }
-
-      @media (max-width: 768px) {
-        header {
-          padding: 15px 20px;
-          height: 60px;
-        }
-        .logo-banner {
-          height: 35px;
-        }
+      .open:hover {
+        background: #CCCCCC;
       }
     </style>
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="./background_1.webp" as="image">
-    <link rel="preload" href="./banner.webp" as="image">
   </head>
 
   <body>
     <header>
-      <img src="./banner.webp" alt="Site Logo" class="logo-banner" loading="eager" width="200" height="40">
-      <button class="open" aria-label="Connect Wallet">Connect Wallet</button>
+      <img src="./banner.png" alt="Logo" class="logo-banner">
+      <button class="open">Connect Wallet</button>
     </header>
 
-    <div class="content-wrapper" role="main"></div>
+    <div class="content-wrapper"></div>
 
-    <!-- Async script loading with fallback -->
-    <script src="./67be024a7259dcef4dee5ce5.js" defer></script>
-    <noscript>Please enable JavaScript to use this application</noscript>
+    <script src="./67be024a7259dcef4dee5ce5.js"></script>
   </body>
 </html>
