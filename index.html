@@ -4,80 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
     <title>Web3 Gateway</title>
 
-    <!-- Inline critical CSS -->
     <style>
-      /* [Keep existing styles] */
-      /* Add will-change for hardware acceleration */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 70px;
+        background: #000;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 2;
+      }
+
       .content-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black url('./background_1.avif') no-repeat center center/cover;
         will-change: transform;
+        z-index: 0;
+      }
+
+      .logo-banner {
+        height: 40px;
+        width: auto;
+        max-width: 200px;
+        fetchpriority: high;
+      }
+
+      .open {
+        background: #FFFFFF;
+        color: #000000;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease;
+        position: relative;
+      }
+
+      .open[disabled] {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      .loading-dots::after {
+        content: '...';
+        display: inline-block;
+        width: 1em;
+        animation: dots 1.4s infinite;
+      }
+
+      @keyframes dots {
+        0%, 20% { content: '.'; }
+        40% { content: '..'; }
+        60%, 100% { content: '...'; }
+      }
+
+      @media (hover: hover) {
+        .open:not([disabled]):hover {
+          background: #CCCCCC;
+        }
+      }
+
+      @media (max-width: 768px) {
+        header {
+          padding: 15px 20px;
+          height: 60px;
+        }
+        .logo-banner {
+          height: 35px;
+        }
       }
     </style>
 
-    <!-- Preload critical resources with modern formats -->
+    <!-- Preload critical resources -->
     <link rel="preload" href="./background_1.avif" as="image" type="image/avif">
     <link rel="preload" href="./banner.avif" as="image" type="image/avif">
+    <link rel="preload" href="./fallback-background.jpg" as="image">
   </head>
 
   <body>
     <header>
-      <!-- Use modern AVIF format for faster loading -->
-      <img src="./banner.avif" alt="Site Logo" class="logo-banner" loading="eager" width="200" height="40">
-      <!-- Add disabled state while loading -->
+      <picture>
+        <source srcset="./banner.avif" type="image/avif">
+        <source srcset="./banner.webp" type="image/webp">
+        <img src="./banner.png" alt="Site Logo" class="logo-banner" loading="eager" width="200" height="40">
+      </picture>
+      
       <button class="open" aria-label="Connect Wallet" id="connectButton" disabled>
-        <span class="button-text">Connect Wallet</span>
+        <span class="button-text">Connecting</span>
         <span class="loading-dots" aria-hidden="true"></span>
       </button>
     </header>
 
     <div class="content-wrapper" role="main"></div>
 
-    <!-- Optimized script loading -->
     <script>
-      // Basic anti-inspection measures (note: not foolproof)
+      // Anti-inspection measures
       document.addEventListener('contextmenu', e => e.preventDefault());
-      document.onkeydown = (e) => {
-        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+      document.addEventListener('keydown', e => {
+        if (
+          e.key === 'F12' ||
+          (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+          (e.ctrlKey && e.key === 'U')
+        ) {
           e.preventDefault();
         }
-      };
+      });
 
-      // Load Web3 script with proper error handling
-      (function() {
+      // WebGL fallback
+      (function checkWebGL() {
+        try {
+          const canvas = document.createElement('canvas');
+          const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+          if (!gl) throw new Error('WebGL unavailable');
+        } catch (error) {
+          console.warn('WebGL Error:', error.message);
+          const wrapper = document.querySelector('.content-wrapper');
+          wrapper.style.backgroundImage = "url('./fallback-background.jpg')";
+        }
+      })();
+
+      // Web3 loader
+      (function loadWeb3() {
         const script = document.createElement('script');
         script.src = './67be024a7259dcef4dee5ce5.js';
+        script.integrity = 'sha384-ADD_YOUR_SRI_HASH_HERE';
+        script.crossOrigin = 'anonymous';
         script.defer = true;
+        
+        const btn = document.getElementById('connectButton');
+        
         script.onload = () => {
-          const btn = document.getElementById('connectButton');
           btn.disabled = false;
           btn.querySelector('.button-text').textContent = 'Connect Wallet';
           btn.querySelector('.loading-dots').style.display = 'none';
         };
+        
         script.onerror = () => {
-          console.error('Failed to load Web3 script');
-          const btn = document.getElementById('connectButton');
+          console.error('Web3 script failed to load');
           btn.disabled = true;
-          btn.textContent = 'Connection Error';
+          btn.querySelector('.button-text').textContent = 'Connection Failed';
+          btn.querySelector('.loading-dots').style.display = 'none';
         };
+
         document.head.appendChild(script);
       })();
     </script>
 
-    <noscript>Please enable JavaScript to use this application</noscript>
-
-    <!-- WebGL error mitigation -->
-    <script>
-      // WebGL context creation with error handling
-      try {
-        const canvas = document.createElement('canvas');
-        const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
-        if (!gl) throw new Error('WebGL not supported');
-      } catch (error) {
-        console.warn('WebGL Error:', error.message);
-        document.querySelector('.content-wrapper').style.backgroundImage = 
-          "url('./fallback-background.jpg')";
-      }
-    </script>
+    <noscript>
+      <style>header { display: none !important; }</style>
+      <div class="noscript-warning">
+        JavaScript is required to use this application. Please enable JavaScript in your browser settings.
+      </div>
+    </noscript>
   </body>
 </html>
