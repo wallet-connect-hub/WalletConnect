@@ -33,7 +33,6 @@
             background: rgba(0, 0, 0, 0.95);
             padding: 15px 30px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
             z-index: 1000;
             backdrop-filter: blur(5px);
@@ -43,6 +42,7 @@
         header {
             top: 0;
             height: var(--header-height);
+            justify-content: space-between; /* Keep header content spaced */
         }
 
         footer {
@@ -51,7 +51,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             border-bottom: none;
             justify-content: flex-start; /* Align footer content to the left */
-            gap: 40px;
+            padding-left: 30px; /* Add padding to the left */
         }
 
         .content-wrapper {
@@ -107,6 +107,8 @@
             color: #FFFFFF;
             font-size: 16px;
             font-weight: 500;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
         }
 
         .footer-stats span {
@@ -124,6 +126,7 @@
             footer {
                 height: var(--mobile-footer-height);
                 gap: 20px;
+                padding-left: 20px; /* Adjust padding for mobile */
             }
 
             .logo-banner {
