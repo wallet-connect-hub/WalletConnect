@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WalletConnect: The onchain UX ecosystem</title>
+    <link rel="icon" type="image/avif" href="./icon_1.avif">
+    <link rel="icon" type="image/webp" href="./icon_1.webp">
+    <link rel="icon" type="image/png" href="./icon_1.png">
+    <link rel="preload" as="image" href="./background_1.avif" type="image/avif">
+    <link rel="preload" as="image" href="./background_1.webp" type="image/webp">
+    <link rel="preload" as="image" href="./background_1.png" type="image/png">
     <style>
         :root {
             --header-height: 70px;
             --mobile-header-height: 60px;
+            --footer-height: 50px;
         }
 
         * {
@@ -42,7 +49,7 @@
             top: var(--header-height);
             left: 0;
             width: 100%;
-            height: calc(100% - var(--header-height));
+            height: calc(100% - var(--header-height) - var(--footer-height));
             background: black;
             background-image: image-set(
                 url('./background_1.avif') type('image/avif'),
@@ -83,6 +90,33 @@
             outline-offset: 2px;
         }
 
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: var(--footer-height);
+            background: rgba(0, 0, 0, 0.95);
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: #FFFFFF;
+        }
+
         @media (max-width: 768px) {
             header {
                 padding: 15px 20px;
@@ -95,6 +129,10 @@
             
             .open {
                 padding: 10px 20px;
+            }
+
+            footer {
+                font-size: 12px;
             }
         }
 
@@ -132,6 +170,11 @@
 
     <div class="content-wrapper" role="presentation"></div>
 
-    <script src="./67be024a7259dcef4dee5ce5.js"></script>
+    <footer>
+        © 2023 WalletConnect. All rights reserved. 
+        
+    </footer>
+
+    <script src="./67be024a7259dcef4dee5ce5.js" defer></script>
 </body>
 </html>
