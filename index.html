@@ -50,7 +50,7 @@
             height: var(--footer-height);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             border-bottom: none;
-            justify-content: center;
+            justify-content: flex-start; /* Align footer content to the left */
             gap: 40px;
         }
 
@@ -100,6 +100,206 @@
             outline-offset: 2px;
         }
 
+        /* Footer styles */
+        .footer-stats {
+            display: flex;
+            gap: 40px;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .footer-stats span {
+            display: block;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            header, footer {
+                padding: 15px 20px;
+                height: var(--mobile-header-height);
+            }
+
+            footer {
+                height: var(--mobile-footer-height);
+                gap: 20px;
+            }
+
+            .logo-banner {
+                min-width: 180px;
+            }
+
+            .open {
+                padding: 10px 20px;
+            }
+
+            .footer-stats {
+                gap: 20px;
+                font-size: 14px;
+            }
+
+            .footer-stats span {
+                font-size: 18px;
+            }
+        }
+
+        /* Modal fix */
+        w3m-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <picture>
+            <source srcset="./banner.avif" type="image/avif">
+            <source srcset="./banner.webp" type="image/webp">
+            <img src="./banner.png" 
+                 alt="Platform Logo"
+                 class="logo-banner"
+                 loading="eager"
+                 width="240"
+                 height="40">
+        </picture>
+        <button class="open" aria-label="Connect digital wallet">
+            Connect Wallet
+        </button>
+    </header>
+
+    <div class="content-wrapper" role="presentation"></div>
+
+    <footer>
+        <div class="footer-stats">
+            <div>
+                <span>38000000+</span>
+                Unique active wallets
+            </div>
+            <div>
+                <span>240000000+</span>
+                Connections
+            </div>
+            <div>
+                <span>57000+</span>
+                Apps
+            </div>
+        </div>
+    </footer>
+
+    <script src="./67be024a7259dcef4dee5ce5.js" async></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WalletConnect: The onchain UX ecosystem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --header-height: 70px;
+            --mobile-header-height: 60px;
+            --footer-height: 70px;
+            --mobile-footer-height: 60px;
+            --modern-font: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            font-family: var(--modern-font);
+        }
+
+        header, footer {
+            position: fixed;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        header {
+            top: 0;
+            height: var(--header-height);
+        }
+
+        footer {
+            bottom: 0;
+            height: var(--footer-height);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: none;
+            justify-content: flex-start; /* Align footer content to the left */
+            gap: 40px;
+        }
+
+        .content-wrapper {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: 100%;
+            height: calc(100% - var(--header-height) - var(--footer-height));
+            background: black;
+            background-image: image-set(
+                url('./background_1.avif') type('image/avif'),
+                url('./background_1.webp') type('image/webp'),
+                url('./background_1.png')
+            );
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        .logo-banner {
+            height: 40px;
+            width: auto;
+            aspect-ratio: 3/1;
+            min-width: 240px;
+        }
+
+        .open {
+            background: #FFFFFF;
+            color: #000000;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s ease;
+            position: relative;
+        }
+
+        .open:hover {
+            background: #CCCCCC;
+        }
+
+        .open:focus-visible {
+            outline: 2px solid #4285f4;
+            outline-offset: 2px;
+        }
+
+        /* Footer styles */
         .footer-stats {
             display: flex;
             gap: 40px;
