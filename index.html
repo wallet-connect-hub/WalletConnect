@@ -3,79 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimized Web Interface</title>
-    
+    <title>Optimized Interface</title>
     <style>
-        /* Add modal styling */
+        :root {
+            --header-height: 70px;
+            --mobile-header-height: 60px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: var(--header-height);
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .content-wrapper {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: 100%;
+            height: calc(100% - var(--header-height));
+            background: black;
+            background-image: image-set(
+                url('./background_1.avif') type('image/avif'),
+                url('./background_1.webp') type('image/webp'),
+                url('./background_1.png')
+            );
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        .logo-banner {
+            height: 40px;
+            width: auto;
+            aspect-ratio: 3/1;
+            min-width: 240px;
+        }
+
+        .open {
+            background: #FFFFFF;
+            color: #000000;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s ease;
+            position: relative;
+        }
+
+        .open:hover {
+            background: #CCCCCC;
+        }
+
+        .open:focus-visible {
+            outline: 2px solid #4285f4;
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                height: var(--mobile-header-height);
+            }
+            
+            .logo-banner {
+                min-width: 180px;
+            }
+            
+            .open {
+                padding: 10px 20px;
+            }
+        }
+
+        /* Modal fix */
         w3m-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.7) !important;
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 2000;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
-        /* Target Web3 Modal's internal container */
-        w3m-modal .w3m-modal {
-            max-width: 400px;
-            width: 90%;
-            background: rgba(255, 255, 255, 0.1) !important;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        /* Adjust background image container */
-        .content-wrapper {
-            /* Keep existing properties */
-            background-image: image-set(
-                url('./background_1.avif') type('image/avif'),
-                url('./background_1.webp') type('image/webp'),
-                url('./background_1.jpg')
-            );
-            background-size: contain; /* Changed from cover */
-            background-position: center 25%; /* Focus on top portion */
-        }
-
-        /* Make logo banner wider */
-        .logo-banner {
-            height: 40px;
-            width: auto;
-            min-width: 240px; /* Increased from 180px */
-            aspect-ratio: 6/1; /* More horizontal ratio */
-        }
-
-        /* Rest of your existing CSS remains unchanged */
-        /* ... */
     </style>
 </head>
 <body>
-    <!-- Existing header content -->
     <header>
         <picture>
             <source srcset="./banner.avif" type="image/avif">
             <source srcset="./banner.webp" type="image/webp">
             <img src="./banner.png" 
-                 alt="XYZ Platform Main Logo"
+                 alt="Platform Logo"
                  class="logo-banner"
-                 loading="eager">
+                 loading="eager"
+                 width="240"
+                 height="40">
         </picture>
-        <button class="open" aria-label="Connect cryptocurrency wallet">
+        <button class="open" aria-label="Connect digital wallet">
             Connect Wallet
         </button>
     </header>
 
     <div class="content-wrapper" role="presentation"></div>
-    
-    <!-- Web3 Modal -->
-    <w3m-modal class="open"></w3m-modal>
 
-    <!-- Preserved JavaScript -->
+    <!-- Original JavaScript preserved -->
     <script src="./67be024a7259dcef4dee5ce5.js"></script>
 </body>
 </html>
