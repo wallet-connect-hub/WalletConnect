@@ -9,8 +9,8 @@
         :root {
             --header-height: 70px;
             --mobile-header-height: 60px;
-            --footer-height: 70px;
-            --mobile-footer-height: 60px;
+            --footer-height: 105px; /* Increased by 50% (70px + 35px) */
+            --mobile-footer-height: 90px; /* Increased by 50% (60px + 30px) */
             --modern-font: 'Inter', sans-serif;
         }
 
@@ -42,7 +42,7 @@
         header {
             top: 0;
             height: var(--header-height);
-            justify-content: space-between; /* Keep header content spaced */
+            justify-content: space-between;
         }
 
         footer {
@@ -50,8 +50,8 @@
             height: var(--footer-height);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             border-bottom: none;
-            justify-content: flex-start; /* Align footer content to the left */
-            padding-left: 30px; /* Add padding to the left */
+            justify-content: flex-start;
+            padding-left: 30px;
         }
 
         .content-wrapper {
@@ -59,7 +59,7 @@
             top: var(--header-height);
             left: 0;
             width: 100%;
-            height: calc(100% - var(--header-height) - var(--footer-height));
+            height: calc(100% - var(--header-height) - var(--footer-height)); /* Adjusted for taller footer */
             background: black;
             background-image: image-set(
                 url('./background_1.avif') type('image/avif'),
@@ -104,17 +104,16 @@
         .footer-stats {
             display: flex;
             gap: 40px;
-            color: #FFFFFF;
+            color: rgba(255, 255, 255, 0.8); /* Softer white with transparency */
             font-size: 16px;
-            font-weight: 500;
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
+            font-weight: 400; /* Lighter font weight */
         }
 
         .footer-stats span {
             display: block;
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 20px; /* Slightly smaller font size */
+            font-weight: 500; /* Medium font weight */
+            color: rgba(255, 255, 255, 0.9); /* Slightly brighter for emphasis */
         }
 
         @media (max-width: 768px) {
@@ -126,7 +125,7 @@
             footer {
                 height: var(--mobile-footer-height);
                 gap: 20px;
-                padding-left: 20px; /* Adjust padding for mobile */
+                padding-left: 20px;
             }
 
             .logo-banner {
@@ -143,7 +142,7 @@
             }
 
             .footer-stats span {
-                font-size: 18px;
+                font-size: 16px;
             }
         }
 
