@@ -6,18 +6,15 @@
     <title>Optimized Web Interface</title>
     
     <style>
-        /* CSS Variables */
+        /* CSS Variables (Preserved) */
         :root {
             --header-height: 70px;
             --mobile-header-height: 60px;
-            --header-bg: rgba(0, 0, 0, 0.9);
             --button-bg: #fff;
             --button-hover-bg: #e0e0e0;
-            --z-base: 0;
-            --z-header: 10;
         }
 
-        /* Selector Specificity Update */
+        /* Selector Specificity (Preserved) */
         html, body, header, div, picture, img, button {
             margin: 0;
             padding: 0;
@@ -35,12 +32,12 @@
             top: 0;
             width: 100%;
             height: var(--header-height);
-            background: var(--header-bg);
+            background: rgba(0, 0, 0, 0.9);
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: var(--z-header);
+            z-index: 1000; /* Reverted to high value for modal compatibility */
             backdrop-filter: blur(5px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -52,7 +49,7 @@
             width: 100%;
             height: 100vh;
             background: #000;
-            z-index: var(--z-base);
+            z-index: 1; /* Reverted to original hierarchy */
             
             background-image: image-set(
                 url('./background_1.avif') type('image/avif'),
@@ -64,6 +61,7 @@
             background-repeat: no-repeat;
         }
 
+        /* Rest of your CSS remains unchanged */
         .logo-banner {
             height: 40px;
             width: 180px;
@@ -124,6 +122,7 @@
     </style>
 </head>
 <body>
+    <!-- Body content remains unchanged -->
     <header>
         <picture>
             <source srcset="./banner.avif" type="image/avif">
