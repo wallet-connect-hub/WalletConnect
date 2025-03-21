@@ -67,16 +67,31 @@
             width: 100%;
             height: calc(100% - var(--header-height) - var(--footer-height));
             background: black;
-            background-image: image-set(
-                url('./background_1.avif') type('image/avif'),
-                url('./background_1.webp') type('image/webp'),
-                url('./background_1.png')
-            );
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
             z-index: 1;
             animation: subtleZoom 20s infinite alternate; /* Subtle zoom animation */
+        }
+
+        /* Default background for desktop and landscape */
+        .content-wrapper {
+            background-image: image-set(
+                url('./background_1.avif') type('image/avif'),
+                url('./background_1.webp') type('image/webp'),
+                url('./background_1.png')
+            );
+        }
+
+        /* Mobile portrait background */
+        @media (max-width: 768px) and (orientation: portrait) {
+            .content-wrapper {
+                background-image: image-set(
+                    url('./background_1m.avif') type('image/avif'),
+                    url('./background_1m.webp') type('image/webp'),
+                    url('./background_1m.png')
+                );
+            }
         }
 
         @keyframes subtleZoom {
@@ -182,19 +197,6 @@
             }
         }
 
-        /* Orientation-specific styles */
-        @media (orientation: portrait) {
-            .content-wrapper {
-                background-size: contain; /* Ensure the background fits in portrait mode */
-            }
-        }
-
-        @media (orientation: landscape) {
-            .content-wrapper {
-                background-size: cover; /* Ensure the background covers the screen in landscape mode */
-            }
-        }
-
         /* Modal CSS */
         w3m-modal {
             position: fixed;
@@ -207,6 +209,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        /* Center the modal content */
+        w3m-modal > * {
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
         }
     </style>
 </head>
