@@ -163,10 +163,16 @@
             .footer-stats {
                 gap: 20px;
                 font-size: 18px; /* Larger font size for mobile */
+                flex-direction: column; /* Stack items vertically on mobile */
+                align-items: center; /* Center items horizontally */
             }
 
             .footer-stats span {
                 font-size: 24px; /* Larger font size for mobile */
+            }
+
+            .content-wrapper {
+                height: calc(100% - var(--mobile-header-height) - var(--mobile-footer-height)); /* Adjusted for taller footer */
             }
         }
 
