@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>WalletConnect: The onchain UX ecosystem</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/avif" href="./icon_1.avif">
+    <link rel="icon" type="image/webp" href="./icon_1.webp">
+    <link rel="icon" type="image/png" href="./icon_1.png">
+    
     <style>
         :root {
             --header-height: 70px;
             --mobile-header-height: 60px;
             --footer-height: 126px; /* Increased by 80% (70px + 56px) */
-            --mobile-footer-height: 150px; /* Increased for better spacing on mobile */
+            --mobile-footer-height: auto; /* Auto height for mobile to accommodate stacked content */
             --modern-font: 'Inter', sans-serif;
         }
 
@@ -50,7 +56,7 @@
             height: var(--footer-height);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             border-bottom: none;
-            justify-content: center; /* Center content on mobile */
+            justify-content: flex-start; /* Align content to the left */
             padding: 15px 20px;
         }
 
@@ -114,14 +120,12 @@
         /* Footer styles */
         .footer-stats {
             display: flex;
-            gap: 20px; /* Reduced gap for mobile */
+            gap: 40px; /* Gap between items */
             color: rgba(255, 255, 255, 0.8); /* Softer white with transparency */
             font-size: 16px; /* Smaller font size for mobile */
             font-weight: 400; /* Lighter font weight */
             opacity: 0; /* Start invisible for fade-in animation */
             animation: fadeIn 1.5s ease-in-out forwards; /* Fade-in animation */
-            flex-wrap: wrap; /* Allow wrapping on mobile */
-            justify-content: center; /* Center content on mobile */
         }
 
         @keyframes fadeIn {
@@ -151,8 +155,6 @@
             footer {
                 height: var(--mobile-footer-height);
                 gap: 10px; /* Reduced gap for mobile */
-                flex-direction: column; /* Stack items vertically on mobile */
-                align-items: center; /* Center items horizontally */
             }
 
             .logo-banner {
@@ -166,10 +168,10 @@
             }
 
             .footer-stats {
-                gap: 10px; /* Reduced gap for mobile */
+                gap: 20px; /* Reduced gap for mobile */
                 font-size: 14px; /* Smaller font size for mobile */
                 flex-direction: column; /* Stack items vertically on mobile */
-                align-items: center; /* Center items horizontally */
+                align-items: flex-start; /* Align items to the left */
             }
 
             .footer-stats span {
