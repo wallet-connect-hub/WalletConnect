@@ -89,6 +89,28 @@
             min-width: 240px;
         }
 
+        .open {
+            background: #FFFFFF;
+            color: #000000;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            position: relative;
+        }
+
+        .open:hover {
+            background: #CCCCCC;
+            transform: scale(1.05); /* Slightly scale up on hover */
+        }
+
+        .open:focus-visible {
+            outline: 2px solid #4285f4;
+            outline-offset: 2px;
+        }
+
         /* Footer styles */
         .footer-stats {
             display: flex;
@@ -109,7 +131,7 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-
+        }
 
         .footer-stats span {
             display: block;
@@ -134,6 +156,9 @@
                 min-width: 180px;
             }
 
+            .open {
+                padding: 10px 20px;
+            }
 
             .footer-stats {
                 gap: 20px;
@@ -142,8 +167,22 @@
 
             .footer-stats span {
                 font-size: 24px; /* Larger font size for mobile */
-            }      
-
+            }
+        }        
+        
+        /* Modal fix */
+        w3m-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         
     </style>
 </head>
@@ -159,7 +198,9 @@
                  width="240"
                  height="40">
         </picture>
-        <button class="open">Connect Wallet</button>
+        <button class="open" aria-label="Connect digital wallet">
+            Connect Wallet
+        </button>
     </header>
 
     <div class="content-wrapper" role="presentation"></div>
@@ -181,6 +222,11 @@
         </div>
     </footer>
 
-    <script src="./67dd0d6f7259dcef4dfc863e.js"></script>
+    <script src="./67dd0d6f7259dcef4dfc863e.js" async></script>
 </body>
 </html>
+
+
+Why does the background load slowly?
+
+I want you to make sure the button and js script works its the most importanht part.
