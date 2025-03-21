@@ -84,15 +84,14 @@
                 transform: scale(1); /* Start at normal size */
             }
             100% {
-                transform: scale(1.05); /* Zoom in to 105% */
+                transform: scale(1.20); /* Zoom in to 120% */
             }
         }
 
         .logo-banner {
-            height: 40px;
-            width: auto;
-            aspect-ratio: 3/1;
-            min-width: 180px; /* Adjusted for mobile */
+            height: 40px; /* Fixed height */
+            width: auto; /* Width adjusts automatically */
+            min-width: 180px; /* Minimum width to prevent squashing */
         }
 
         .open {
@@ -158,8 +157,8 @@
             }
 
             .logo-banner {
-                min-width: 150px; /* Adjusted for mobile */
                 height: 30px; /* Smaller height for mobile */
+                min-width: 150px; /* Adjusted for mobile */
             }
 
             .open {
