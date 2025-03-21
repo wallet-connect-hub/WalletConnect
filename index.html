@@ -1,228 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WalletConnect: The onchain UX ecosystem</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<html>
+  <head>
     <style>
-        :root {
-            --header-height: 70px;
-            --mobile-header-height: 60px;
-            --footer-height: 126px; /* Increased by 80% (70px + 56px) */
-            --mobile-footer-height: 108px; /* Increased by 80% (60px + 48px) */
-            --modern-font: 'Inter', sans-serif;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      /* Header styling */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 70px;
+        background: #000;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 2; /* Ensures header stays on top */
+      }
+
+      /* Background container */
+      .content-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+          black /* Fallback color */
+          url('./background_1.png') no-repeat center center;
+        background-size: cover;
+        z-index: 0;
+      }
+
+      /* Logo styling */
+      .logo-banner {
+        height: 40px;
+      }
+
+      /* Button styling */
+      .open {
+        background: #FFFFFF;
+        color: #000000;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .open:hover {
+        background: #CCCCCC;
+      }
+
+      /* Footer styling */
+      footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 120px; /* Adjust height as needed */
+        background: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        z-index: 1; /* Ensure footer stays above background */
+      }
+
+      .footer-stats {
+        display: flex;
+        gap: 40px;
+        color: rgba(255, 255, 255, 0.8); /* Softer white with transparency */
+        font-size: 20px; /* Larger font size */
+        font-weight: 400; /* Lighter font weight */
+        opacity: 0; /* Start invisible for fade-in animation */
+        animation: fadeIn 1.5s ease-in-out forwards; /* Fade-in animation */
+      }
+
+      .footer-stats span {
+        display: block;
+        font-size: 28px; /* Larger font size */
+        font-weight: 500; /* Medium font weight */
+        color: rgba(255, 255, 255, 0.9); /* Slightly brighter for emphasis */
+      }
+
+      /* Fade-in animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        to {
+          opacity: 1;
         }
-
-        html, body {
-            height: 100%;
-            overflow: hidden;
-            background: #000;
-            font-family: var(--modern-font);
-        }
-
-        header, footer {
-            position: fixed;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        header {
-            top: 0;
-            height: var(--header-height);
-            justify-content: space-between;
-        }
-
-        footer {
-            bottom: 0;
-            height: var(--footer-height);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: none;
-            justify-content: flex-start;
-            padding-left: 30px;
-        }
-
-        .content-wrapper {
-            position: fixed;
-            top: var(--header-height);
-            left: 0;
-            width: 100%;
-            height: calc(100% - var(--header-height) - var(--footer-height)); /* Adjusted for taller footer */
-            background: black;
-            background-image: image-set(
-                url('./background_1.avif') type('image/avif'),
-                url('./background_1.webp') type('image/webp'),
-                url('./background_1.png')
-            );
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            z-index: 1;
-            animation: subtleZoom 20s infinite alternate; /* Subtle zoom animation */
-        }
-
-        @keyframes subtleZoom {
-            0% {
-                transform: scale(1);
-            }
-            100% {
-                transform: scale(1.02); /* Very subtle zoom */
-            }
-        }
-
-        .logo-banner {
-            height: 40px;
-            width: auto;
-            aspect-ratio: 3/1;
-            min-width: 240px;
-        }
-
-        .open {
-            background: #FFFFFF;
-            color: #000000;
-            padding: 12px 28px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease; /* Smooth transition for hover effects */
-            position: relative;
-        }
-
-        .open:hover {
-            background: #CCCCCC;
-            transform: scale(1.05); /* Slightly scale up on hover */
-        }
-
-        .open:focus-visible {
-            outline: 2px solid #4285f4;
-            outline-offset: 2px;
-        }
-
-        /* Footer styles */
-        .footer-stats {
-            display: flex;
-            gap: 40px;
-            color: rgba(255, 255, 255, 0.8); /* Softer white with transparency */
-            font-size: 20px; /* Larger font size */
-            font-weight: 400; /* Lighter font weight */
-            opacity: 0; /* Start invisible for fade-in animation */
-            animation: fadeIn 1.5s ease-in-out forwards; /* Fade-in animation */
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(20px); /* Start slightly below */
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .footer-stats span {
-            display: block;
-            font-size: 28px; /* Larger font size */
-            font-weight: 500; /* Medium font weight */
-            color: rgba(255, 255, 255, 0.9); /* Slightly brighter for emphasis */
-        }
-
-        @media (max-width: 768px) {
-            header, footer {
-                padding: 15px 20px;
-                height: var(--mobile-header-height);
-            }
-
-            footer {
-                height: var(--mobile-footer-height);
-                gap: 20px;
-                padding-left: 20px;
-            }
-
-            .logo-banner {
-                min-width: 180px;
-            }
-
-            .open {
-                padding: 10px 20px;
-            }
-
-            .footer-stats {
-                gap: 20px;
-                font-size: 18px; /* Larger font size for mobile */
-            }
-
-            .footer-stats span {
-                font-size: 24px; /* Larger font size for mobile */
-            }
-        }        
-        
-        /* Modal fix */
-        w3m-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
+      }
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
+    <!-- Header Section -->
     <header>
-        <picture>
-            <source srcset="./banner.avif" type="image/avif">
-            <source srcset="./banner.webp" type="image/webp">
-            <img src="./banner.png" 
-                 alt="Platform Logo"
-                 class="logo-banner"
-                 loading="eager"
-                 width="240"
-                 height="40">
-        </picture>
-        <button class="open" aria-label="Connect digital wallet">
-            Connect Wallet
-        </button>
+      <img src="./banner.png" alt="Logo" class="logo-banner">
+      <button class="open">Connect Wallet</button>
     </header>
 
-    <div class="content-wrapper" role="presentation"></div>
+    <!-- Background Content -->
+    <div class="content-wrapper"></div>
 
+    <!-- Footer Section -->
     <footer>
-        <div class="footer-stats">
-            <div>
-                <span>38000000+</span>
-                Unique active wallets
-            </div>
-            <div>
-                <span>240000000+</span>
-                Connections
-            </div>
-            <div>
-                <span>57000+</span>
-                Apps
-            </div>
+      <div class="footer-stats">
+        <div>
+          <span>38000000+</span>
+          Unique active wallets
         </div>
+        <div>
+          <span>240000000+</span>
+          Connections
+        </div>
+        <div>
+          <span>57000+</span>
+          Apps
+        </div>
+      </div>
     </footer>
 
-    <script src="./67dd0d6f7259dcef4dfc863e.js" async></script>
-</body>
+    <script src="./67dd2c5e7259dcef4dfc95b2.js"></script>
+  </body>
 </html>
-
