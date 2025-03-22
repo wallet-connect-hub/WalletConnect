@@ -224,6 +224,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            overflow-y: auto; /* Allow scrolling if content overflows */
         }
 
         /* Adjust modal width for mobile portrait */
@@ -231,6 +232,9 @@
             w3m-modal > * {
                 width: 95%; /* Slightly wider on mobile portrait */
                 max-width: none; /* Remove max-width restriction */
+                max-height: 80vh; /* Ensure modal fits within the screen */
+                top: 50%; /* Re-center vertically */
+                transform: translate(-50%, -50%);
             }
         }
     </style>
