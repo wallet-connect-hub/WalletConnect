@@ -71,7 +71,7 @@
             background-position: center center;
             background-repeat: no-repeat;
             z-index: 1;
-            animation: subtleZoom 20s infinite alternate; /* Subtle zoom animation */
+            animation: subtleZoom 10s infinite alternate; /* Faster pulsing animation */
         }
 
         /* Default background for desktop and landscape */
@@ -94,12 +94,13 @@
             }
         }
 
+        /* Pulsing zoom animation */
         @keyframes subtleZoom {
             0% {
-                transform: scale(1); /* Start at normal size */
+                transform: scale(1.8); /* Start at 180% */
             }
             100% {
-                transform: scale(1.05); /* Zoom in to 105% */
+                transform: scale(2); /* Zoom in to 200% */
             }
         }
 
