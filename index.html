@@ -15,8 +15,8 @@
         :root {
             --header-height: 70px;
             --mobile-header-height: 60px;
-            --footer-height: 126px; /* Increased by 80% (70px + 56px) */
-            --mobile-footer-height: 150px; /* Fixed height for mobile footer */
+            --footer-height: 126px;
+            --mobile-footer-height: 150px;
             --modern-font: 'Inter', sans-serif;
         }
 
@@ -56,7 +56,7 @@
             height: var(--footer-height);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             border-bottom: none;
-            justify-content: flex-start; /* Align content to the left */
+            justify-content: flex-start;
             padding: 15px 20px;
         }
 
@@ -71,10 +71,10 @@
             background-position: center center;
             background-repeat: no-repeat;
             z-index: 1;
-            animation: subtleZoom 10s infinite alternate; /* Faster pulsing animation */
+            animation: subtleZoom 10s infinite alternate;
         }
 
-        /* Default background for desktop and landscape */
+        /* Default background */
         .content-wrapper {
             background-image: image-set(
                 url('./background_1.avif') type('image/avif'),
@@ -91,42 +91,37 @@
                     url('./background_1m.webp') type('image/webp'),
                     url('./background_1m.png')
                 );
-                background-size: contain; /* Ensure the image fits within the screen */
-                height: calc(100% - var(--mobile-header-height) - var(--mobile-footer-height)); /* Fixed height calculation */
+                background-size: contain;
+                height: calc(100% - var(--mobile-header-height) - var(--mobile-footer-height));
             }
         }
 
-        /* Pulsing zoom animation */
         @keyframes subtleZoom {
-            0% {
-                transform: scale(1.2); /* Start at 120% */
-            }
-            100% {
-                transform: scale(1.5); /* Zoom in to 150% */
-            }
+            0% { transform: scale(1.2); }
+            100% { transform: scale(1.5); }
         }
 
         .logo-banner {
-            height: 40px; /* Fixed height */
-            width: auto; /* Width adjusts automatically */
-            min-width: 180px; /* Minimum width to prevent squashing */
+            height: 40px;
+            width: auto;
+            min-width: 180px;
         }
 
         .open {
             background: #FFFFFF;
             color: #000000;
-            padding: 10px 20px; /* Adjusted for mobile */
+            padding: 10px 20px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            transition: all 0.3s ease;
             position: relative;
         }
 
         .open:hover {
             background: #CCCCCC;
-            transform: scale(1.05); /* Slightly scale up on hover */
+            transform: scale(1.05);
         }
 
         .open:focus-visible {
@@ -137,66 +132,60 @@
         /* Footer styles */
         .footer-stats {
             display: flex;
-            gap: 40px; /* Gap between items */
-            color: rgba(255, 255, 255, 0.8); /* Softer white with transparency */
-            font-size: 16px; /* Smaller font size for mobile */
-            font-weight: 400; /* Lighter font weight */
-            opacity: 0; /* Start invisible for fade-in animation */
-            animation: fadeIn 1.5s ease-in-out forwards; /* Fade-in animation */
+            gap: 40px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
         }
 
         @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(20px); /* Start slightly below */
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .footer-stats span {
             display: block;
-            font-size: 20px; /* Smaller font size for mobile */
-            font-weight: 500; /* Medium font weight */
-            color: rgba(255, 255, 255, 0.9); /* Slightly brighter for emphasis */
+            font-size: 20px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         @media (max-width: 768px) {
             header, footer {
-                padding: 10px 15px; /* Adjusted padding for mobile */
+                padding: 10px 15px;
                 height: var(--mobile-header-height);
             }
 
             footer {
                 height: var(--mobile-footer-height);
-                gap: 10px; /* Reduced gap for mobile */
+                gap: 10px;
             }
 
             .logo-banner {
-                height: 30px; /* Smaller height for mobile */
-                min-width: 150px; /* Adjusted for mobile */
+                height: 30px;
+                min-width: 150px;
             }
 
             .open {
-                padding: 8px 16px; /* Adjusted for mobile */
-                font-size: 14px; /* Smaller font size for mobile */
+                padding: 8px 16px;
+                font-size: 14px;
             }
 
             .footer-stats {
-                gap: 20px; /* Reduced gap for mobile */
-                font-size: 12px; /* Smaller font size for mobile */
-                flex-direction: column; /* Stack items vertically on mobile */
-                align-items: flex-start; /* Align items to the left */
+                gap: 20px;
+                font-size: 12px;
+                flex-direction: column;
+                align-items: flex-start;
             }
 
             .footer-stats span {
-                font-size: 16px; /* Smaller font size for mobile */
+                font-size: 16px;
             }
         }
 
-        /* Modal CSS */
+        /* Enhanced Modal CSS */
         w3m-modal {
             position: fixed;
             top: 0;
@@ -207,30 +196,40 @@
             z-index: 2000;
             display: flex;
             justify-content: center;
-            align-items: center; /* Center the modal vertically and horizontally */
+            align-items: center;
         }
 
-        /* Center the modal content */
         w3m-modal > * {
             position: relative;
-            width: 90%; /* Adjust to screen width on mobile */
-            max-width: 400px; /* Maximum width for larger screens */
-            max-height: 90vh; /* Ensure modal fits within the screen */
+            width: 100%;
+            max-width: 360px;
+            height: auto;
             margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            overflow-y: auto; /* Allow scrolling if content overflows */
+            padding: 0 !important;
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            background: transparent !important;
+            box-shadow: none !important;
         }
 
-        /* Adjust modal for very small screens (below 400px) */
+        w3m-modal .w3m-modal-card {
+            width: 100% !important;
+            max-width: 100% !important;
+            border-radius: 0 !important;
+            padding: 0;
+            margin: 0;
+        }
+
         @media (max-width: 400px) {
             w3m-modal > * {
-                width: 95%; /* Slightly wider on very small screens */
-                max-width: none; /* Remove max-width restriction */
-                max-height: 80vh; /* Ensure modal fits within the screen */
-                padding: 15px; /* Reduce padding for very small screens */
+                max-width: 100%;
+                margin: 0 10px;
+            }
+            
+            w3m-modal .w3m-modal-card {
+                border-radius: 0 !important;
+                min-height: 100vh;
             }
         }
     </style>
