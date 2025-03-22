@@ -216,13 +216,22 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            max-width: 90%;
+            width: 90%; /* Adjust to screen width on mobile */
+            max-width: 400px; /* Maximum width for larger screens */
             max-height: 90%;
             margin: auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Adjust modal width for mobile portrait */
+        @media (max-width: 768px) and (orientation: portrait) {
+            w3m-modal > * {
+                width: 95%; /* Slightly wider on mobile portrait */
+                max-width: none; /* Remove max-width restriction */
+            }
         }
     </style>
 </head>
@@ -259,16 +268,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Modal Example -->
-    <w3m-modal>
-        <div>
-            <h2>Connect Wallet</h2>
-            <p>Choose a wallet to connect:</p>
-            <button>MetaMask</button>
-            <button>WalletConnect</button>
-        </div>
-    </w3m-modal>
 
     <script src="./67dd2c5e7259dcef4dfc95b2.js"></script>
 </body>
