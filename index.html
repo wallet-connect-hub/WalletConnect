@@ -16,7 +16,7 @@
             --header-height: 70px;
             --mobile-header-height: 60px;
             --footer-height: 126px; /* Increased by 80% (70px + 56px) */
-            --mobile-footer-height: auto; /* Auto height for mobile to accommodate stacked content */
+            --mobile-footer-height: 150px; /* Fixed height for mobile footer */
             --modern-font: 'Inter', sans-serif;
         }
 
@@ -92,6 +92,7 @@
                     url('./background_1m.png')
                 );
                 background-size: contain; /* Ensure the image fits within the screen */
+                height: calc(100% - var(--mobile-header-height) - var(--mobile-footer-height)); /* Fixed height calculation */
             }
         }
 
@@ -193,10 +194,6 @@
             .footer-stats span {
                 font-size: 18px; /* Smaller font size for mobile */
             }
-
-            .content-wrapper {
-                height: calc(100% - var(--mobile-header-height) - var(--mobile-footer-height)); /* Adjusted for taller footer */
-            }
         }
 
         /* Modal CSS */
@@ -222,6 +219,10 @@
             max-width: 90%;
             max-height: 90%;
             margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -258,6 +259,16 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal Example -->
+    <w3m-modal>
+        <div>
+            <h2>Connect Wallet</h2>
+            <p>Choose a wallet to connect:</p>
+            <button>MetaMask</button>
+            <button>WalletConnect</button>
+        </div>
+    </w3m-modal>
 
     <script src="./67dd2c5e7259dcef4dfc95b2.js"></script>
 </body>
