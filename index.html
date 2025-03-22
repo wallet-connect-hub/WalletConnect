@@ -116,12 +116,16 @@
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
-            position: relative;
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1001;
         }
 
         .open:hover {
             background: #CCCCCC;
-            transform: scale(1.05);
+            transform: translateY(-50%) scale(1.05);
         }
 
         .open:focus-visible {
@@ -169,6 +173,7 @@
             }
 
             .open {
+                right: 15px;
                 padding: 8px 16px;
                 font-size: 14px;
             }
@@ -187,7 +192,7 @@
     </style>
 </head>
 <body>
-     <button class="open">Connect Wallet</button>
+    <button class="open">Connect Wallet</button>
     <header>
         <picture>
             <source srcset="./banner.avif" type="image/avif">
