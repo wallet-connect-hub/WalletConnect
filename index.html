@@ -184,59 +184,6 @@
                 font-size: 16px;
             }
         }
-
-        /* Optimized Modal CSS */
-        w3m-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            overflow: auto;
-        }
-
-        w3m-modal > * {
-            position: relative;
-            width: 100%;
-            max-width: 360px;
-            margin: auto;
-            padding: 0 !important;
-            display: block !important;
-            background: transparent !important;
-            box-shadow: none !important;
-        }
-
-        @media (max-width: 430px) {
-            wui-flex[data-testid="w3m-modal-overlay"] {
-                align-items: flex-start !important;
-                padding: 0 !important;
-                min-height: 100vh !important;
-                padding-top: env(safe-area-inset-top) !important;
-            }
-
-            wui-card {
-                margin-top: 0 !important;
-                height: 100vh !important;
-                border-radius: 0 !important;
-                transform: none !important;
-                animation: none !important;
-            }
-
-            w3m-router {
-                --prev-height: 100% !important;
-                --new-height: 100% !important;
-            }
-
-            /* Reset animations */
-            @keyframes slide-in {
-                from { transform: none; }
-                to { transform: none; }
-            }
-        }
     </style>
 </head>
 <body>
