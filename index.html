@@ -83,16 +83,15 @@
             );
         }
 
-        /* Mobile portrait background */
-        @media (max-width: 768px) and (orientation: portrait) {
-            .content-wrapper {
-                background-image: image-set(
-                    url('./background_1m.avif') type('image/avif'),
-                    url('./background_1m.webp') type('image/webp'),
-                    url('./background_1m.png')
-                );
-            }
-        }
+      @media (max-width: 768px) {
+    .content-wrapper {
+        background-image: image-set(
+            url('./background_1m.avif') type('image/avif'),
+            url('./background_1m.webp') type('image/webp'),
+            url('./background_1m.png')
+        );
+    }
+}
 
         /* Pulsing zoom animation */
         @keyframes subtleZoom {
