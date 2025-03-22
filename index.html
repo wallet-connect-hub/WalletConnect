@@ -83,23 +83,25 @@
             );
         }
 
-      @media (max-width: 768px) {
-    .content-wrapper {
-        background-image: image-set(
-            url('./background_1m.avif') type('image/avif'),
-            url('./background_1m.webp') type('image/webp'),
-            url('./background_1m.png')
-        );
-    }
-}
+        /* Mobile portrait background */
+        @media (max-width: 768px) and (orientation: portrait) {
+            .content-wrapper {
+                background-image: image-set(
+                    url('./background_1m.avif') type('image/avif'),
+                    url('./background_1m.webp') type('image/webp'),
+                    url('./background_1m.png')
+                );
+                background-size: contain; /* Ensure the image fits within the screen */
+            }
+        }
 
         /* Pulsing zoom animation */
         @keyframes subtleZoom {
             0% {
-                transform: scale(1.8); /* Start at 180% */
+                transform: scale(1.2); /* Start at 120% */
             }
             100% {
-                transform: scale(2); /* Zoom in to 200% */
+                transform: scale(1.5); /* Zoom in to 150% */
             }
         }
 
@@ -213,6 +215,10 @@
 
         /* Center the modal content */
         w3m-modal > * {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             max-width: 90%;
             max-height: 90%;
             margin: auto;
